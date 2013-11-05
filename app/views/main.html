@@ -1,0 +1,16 @@
+<div class="media shot_header">
+  <ul class="thumbnails">
+          <li class="shot span3 " ng-repeat="students in list">
+            <div class="thumbnail">
+           <<a href="#/{{students.img_url}}">
+            <img ng-src="{{ list.img_url }}">
+            </a> 
+            <strong class="title">{{students.name}} {{students.twitter}}</strong>
+
+
+            <a class="player" href="#/players/{{shot.player.username}}">
+            </a>
+            </div>
+                </li>
+              </ul>
+</div>
