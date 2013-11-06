@@ -1,17 +1,17 @@
 var mongoose = require('mongoose');
 var thumbnailPluginLib = require('mongoose-thumbnail');
+var path = require('path');
 var thumbnailPlugin = thumbnailPluginLib.thumbnailPlugin;
 var make_upload_to_model = thumbnailPluginLib.make_upload_to_model;
 
-///
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/students');
+var db = mongoose.connection;
 
-// console.log(__dirname);
-// var uploads_base = "./uploads";
-// var uploads = path.join(uploads_base, "img");
+var uploads_base = path.join(__dirname, "uploads");
+var uploads = path.join(uploads_base, "img");
 
-///
-
-var Student = mongoose.model('Student', new mongoose.Schema({
+var StudentSchema = new mongoose.Schema({
 	name: String, 
 	speed_pitch: String,
 	skills: String,
@@ -20,16 +20,20 @@ var Student = mongoose.model('Student', new mongoose.Schema({
 	blog: String,
 	linkedin: String,
 	twitter: String
-}));
+});
 
-Student.thumbnailPlugin, {
-    	name: "photo",
-    	format: "jpg",
-    	size: 80,
-    	inline: true,
-    	save: true,
-    	upload_to: make_upload_to_model('/uploads/img'),
-    	relative_to: "/uploads"
-		};
+StudentSchema.plugin(thumbnailPlugin, {
+	name: "photo",
+	format: "jpg",
+	size: 96,
+	inline: true,
+	save: true,
+	upload_to: make_upload_to_model(uploads, 'photos'),
+	relative_to: uploads_base
+});
+
+var Student = db.model("Student", StudentSchema)
 
 module.exports = Student;
+
+//var Student = mongoose.model('Student', new mongoose.Schema({

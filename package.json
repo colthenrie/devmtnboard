@@ -14,7 +14,8 @@
         "ejs": "*",
         "request": "*",
         "mongoose-file":"*",
-        "mongoose-thumbnail":"*"
+        "mongoose-thumbnail":"*",
+        "path": "*"
     },
     "devDependencies": {
         "bootstrap":"*",

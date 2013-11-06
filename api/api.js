@@ -1,4 +1,6 @@
 var Student = require ('./students.js');
+var path = require('path');
+
 
 module.exports.listStudents = function(req, res) {
 	var query ={};
@@ -8,7 +10,7 @@ module.exports.listStudents = function(req, res) {
 
 };
 
-module.exports.saveStudent = function(req, res){
+module.exports.saveStudent = function(req, res, next){
 	var newStudent = new Student({
 		name: req.body.name, 
 		speed_pitch: req.body.speed_pitch,
@@ -19,8 +21,11 @@ module.exports.saveStudent = function(req, res){
 		linkedin: req.body.linkedin,
 		twitter: req.body.twitter,
 	});
-	newStudent.picture.set('photo.file', req.files.photo);
+	newStudent.set('photo.file', req.files.photo);
 	newStudent.save(function(err) {
-		res.send("This was posted");
-	});
-};
+		//if (err) {
+   		//	return next(err);
+   		//}
+    });
+	res.send("This was posted");
+}

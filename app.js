@@ -6,7 +6,9 @@ var express = require('express'),
 var app = express();
 
 app.configure(function() {
-  app.use(express.bodyParser());
+	//This line is from a GridFS tutorial on youtube.
+	//app.use(express.static(__dirname + '/public'));
+  	app.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/api/uploads' }));
 	app.use(function(req, res, next) {
 		res.header('Access-Control-Allow-Origin', '*');
 		res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
