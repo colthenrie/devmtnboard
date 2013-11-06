@@ -1,15 +1,21 @@
 var mongoose = require('mongoose');
-var thumbnailPluginLib = require('mongoose-thumbnail');
 var path = require('path');
+//fileplugin
+var filePluginLib = require('mongoose-file');
+var filePlugin = filePluginLib.filePlugin;
+var make_upload_to_model = filePluginLib.make_upload_to_model;
+
+//Thumbnail Plugin
+var thumbnailPluginLib = require('mongoose-thumbnail');
 var thumbnailPlugin = thumbnailPluginLib.thumbnailPlugin;
-var make_upload_to_model = thumbnailPluginLib.make_upload_to_model;
+//var make_upload_to_model = thumbnailPluginLib.make_upload_to_model;
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/students');
 var db = mongoose.connection;
 
-var uploads_base = path.join(__dirname, "uploads");
-var uploads = path.join(uploads_base, "img");
+var uploads_base = "img";
+var uploads = path.join(uploads_base, "users");
 
 var StudentSchema = new mongoose.Schema({
 	name: String, 
@@ -21,16 +27,24 @@ var StudentSchema = new mongoose.Schema({
 	linkedin: String,
 	twitter: String
 });
-
-StudentSchema.plugin(thumbnailPlugin, {
+//File Plugin : https://github.com/panta/mongoose-file
+StudentSchema.plugin(filePlugin, {
 	name: "photo",
-	format: "jpg",
-	size: 96,
-	inline: false,
-	save: true,
-	upload_to: make_upload_to_model(uploads, 'photos'),
-	relative_to: uploads_base
-});
+	type: "jpg",
+	//upload_to: make_upload_to_model(uploads, 'photos'),
+	relative_to: uploads
+})
+
+//Thumbnail Plugin : https://github.com/panta/mongoose-thumbnail
+// StudentSchema.plugin(thumbnailPlugin, {
+// 	name: "photo",
+// 	format: "jpg",
+// 	size: 96,
+// 	inline: false,
+// 	save: true,
+	//upload_to: make_upload_to_model(uploads, 'photos'),
+	//relative_to: uploads_base
+//});
 
 var Student = db.model("Student", StudentSchema)
 
