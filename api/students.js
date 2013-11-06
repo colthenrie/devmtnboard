@@ -14,7 +14,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/students');
 var db = mongoose.connection;
 
-var uploads_base = "img";
+var uploads_base = "../img";
 var uploads = path.join(uploads_base, "users");
 
 var StudentSchema = new mongoose.Schema({

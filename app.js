@@ -8,6 +8,7 @@ var app = express();
 app.configure(function() {
 	//This line is from a GridFS tutorial on youtube.
 	//app.use(express.static(__dirname + '/public'));
+	//{ keepExtensions: true, uploadDir: __dirname + '/app/img/users' })
   	app.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/app/img/users' }));
 	app.use(function(req, res, next) {
 		res.header('Access-Control-Allow-Origin', '*');
