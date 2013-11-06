@@ -26,7 +26,7 @@ StudentSchema.plugin(thumbnailPlugin, {
 	name: "photo",
 	format: "jpg",
 	size: 96,
-	inline: true,
+	inline: false,
 	save: true,
 	upload_to: make_upload_to_model(uploads, 'photos'),
 	relative_to: uploads_base
