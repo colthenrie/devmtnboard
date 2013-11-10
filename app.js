@@ -24,7 +24,7 @@ mongoose.connect('mongodb://localhost/students');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection Error: '));
 console.log("This Works!");
-
+console.log(__dirname);
 var api = require('./api/api.js');
 
 

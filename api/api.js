@@ -11,6 +11,8 @@ module.exports.listStudents = function(req, res) {
 };
 
 module.exports.saveStudent = function(req, res, next){
+	console.log(req.files.photo.path);
+	var filenameref = req.files.photo.path.replace(/^.*[\\\/]/, '');
 	var newStudent = new Student({
 		name: req.body.name, 
 		speed_pitch: req.body.speed_pitch,
@@ -20,6 +22,7 @@ module.exports.saveStudent = function(req, res, next){
 		blog: req.body.blog,
 		linkedin: req.body.linkedin,
 		twitter: req.body.twitter,
+		filename: filenameref
 	});
 	newStudent.set('photo.file', req.files.photo);
 	newStudent.save(function(err) {

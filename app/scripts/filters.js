@@ -1,7 +1,7 @@
 'use strict';
 var filters = angular.module('hireboardApp.filters',  []);
 
-filters.filter('dabbbleDate', function($filter){
+filters.filter('filename', function($filter){
 	return function (value, format) {
 		console.log(value, format);
 		if (value)

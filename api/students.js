@@ -11,7 +11,7 @@ var thumbnailPlugin = thumbnailPluginLib.thumbnailPlugin;
 //var make_upload_to_model = thumbnailPluginLib.make_upload_to_model;
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/students');
+mongoose.connect('mongodb://localhost/hireboard');
 var db = mongoose.connection;
 
 var uploads_base = "../img";
@@ -22,17 +22,22 @@ var StudentSchema = new mongoose.Schema({
 	speed_pitch: String,
 	skills: String,
 	current_work: String,
+	email: String,
+	phone_number: String,
 	website: String,
 	blog: String,
 	linkedin: String,
-	twitter: String
+	twitter: String,
+	filename: String
 });
+
+
 //File Plugin : https://github.com/panta/mongoose-file
 StudentSchema.plugin(filePlugin, {
 	name: "photo",
 	type: "jpg",
-	//upload_to: make_upload_to_model(uploads, 'photos'),
-	relative_to: uploads
+	//upload_to: uploads,
+	relative_to: uploads_base
 })
 
 //Thumbnail Plugin : https://github.com/panta/mongoose-thumbnail
